@@ -1,81 +1,1273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>Download — MTRS · SDI-BCA Toolkit</title>
-<link rel="stylesheet" href="assets/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f6f5">
+  <title>Download — MTRS / SDI-BCA Toolkit</title>
+  <style>
+    :root {
+      --accent: #33aa55;
+      --accent-dark: #268743;
+      --accent-soft: #eaf5ed;
+      --bg: #f5f6f5;
+      --surface: #ffffff;
+      --surface-muted: #f0f2f0;
+      --text: #303633;
+      --text-secondary: #69716c;
+      --text-muted: #929a94;
+      --border: #e2e6e2;
+      --code-bg: #242927;
+      --code-text: #dce5de;
+      --sidebar-width: 248px;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Helvetica, Arial, sans-serif;
+      --font-mono: Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 32px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* Sidebar */
+
+    .sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      width: var(--sidebar-width);
+      padding: 34px 24px 25px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 48px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.8;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-main {
+      color: var(--text);
+    }
+
+    .brand-slash {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .brand-sub {
+      color: var(--accent);
+    }
+
+    .brand-toolkit {
+      flex-basis: 100%;
+      margin-top: -5px;
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.4px;
+    }
+
+    .nav-label {
+      margin: 0 0 12px 10px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .nav-list a {
+      display: flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 8px 12px;
+      border-left: 2px solid transparent;
+      border-radius: 3px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      transition: color 160ms ease, background 160ms ease;
+    }
+
+    .nav-list a:hover,
+    .nav-list a.active {
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+    }
+
+    .nav-list a.active {
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .sidebar-bottom {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .sidebar-bottom a {
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      transition: color 160ms ease;
+    }
+
+    .sidebar-bottom a:hover {
+      color: var(--accent);
+    }
+
+    .sidebar-indicator {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      vertical-align: middle;
+    }
+
+    /* Main layout */
+
+    .main {
+      min-height: 100vh;
+      margin-left: var(--sidebar-width);
+    }
+
+    .container {
+      width: min(100% - 104px, 1000px);
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      padding: 91px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 24px;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    .eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0 0 22px;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: clamp(30px, 4vw, 43px);
+      font-weight: 700;
+      line-height: 1.28;
+      letter-spacing: -2px;
+    }
+
+    .hero-description {
+      max-width: 730px;
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.95;
+    }
+
+    .hero-description strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .metadata {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 29px;
+    }
+
+    .meta-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 29px;
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .meta-tag.version {
+      border-color: #c5e4ce;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 160ms ease;
+    }
+
+    .button:hover {
+      border-color: var(--accent);
+      color: var(--accent-dark);
+    }
+
+    .button-primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .button-primary:hover {
+      border-color: var(--accent-dark);
+      background: var(--accent-dark);
+      color: #fff;
+    }
+
+    .button .arrow {
+      margin-left: 9px;
+      font-size: 15px;
+      line-height: 1;
+    }
+
+    /* Content sections */
+
+    .section {
+      padding: 62px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-heading {
+      margin-bottom: 32px;
+    }
+
+    .section-kicker {
+      margin-bottom: 9px;
+      color: var(--accent-dark);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 23px;
+      font-weight: 700;
+      line-height: 1.45;
+      letter-spacing: -0.8px;
+    }
+
+    .section-lead {
+      margin: 9px 0 0;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    /* Method cards */
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .method-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 25px 24px 23px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+      transition: border-color 180ms ease, transform 180ms ease;
+    }
+
+    .method-card:hover {
+      border-color: #b8d9c1;
+      transform: translateY(-2px);
+    }
+
+    .method-number {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      min-height: 24px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .method-card h3 {
+      margin: 17px 0 13px;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.55;
+      letter-spacing: -0.4px;
+    }
+
+    .method-card p {
+      margin: 0 0 16px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.85;
+    }
+
+    .method-card .introduced {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+
+    .method-link {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 7px;
+      margin-top: 15px;
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .method-link:hover {
+      color: var(--accent);
+    }
+
+    /* Reporting table */
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      padding: 14px 17px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-muted);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 17px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 12px;
+      line-height: 1.75;
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: #fafcfb;
+    }
+
+    td:first-child {
+      width: 34%;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    td:nth-child(2) {
+      width: 46%;
+    }
+
+    td:last-child {
+      width: 20%;
+      color: var(--accent-dark);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .verdict {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 19px;
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    .verdict-code {
+      display: inline-block;
+      padding: 3px 8px;
+      border: 1px solid #c5e4ce;
+      border-radius: 2px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* Quick start */
+
+    .quickstart-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 230px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .code-window {
+      overflow: hidden;
+      border: 1px solid #303834;
+      border-radius: 4px;
+      background: var(--code-bg);
+      box-shadow: 0 3px 12px rgba(25, 35, 29, 0.06);
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 39px;
+      padding: 0 15px;
+      border-bottom: 1px solid #39413d;
+      color: #9ba79f;
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .terminal-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #59625d;
+    }
+
+    .terminal-dots span:first-child {
+      background: var(--accent);
+    }
+
+    pre {
+      overflow-x: auto;
+      margin: 0;
+      padding: 22px 20px 24px;
+      color: var(--code-text);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 2.2;
+      tab-size: 4;
+    }
+
+    pre code {
+      font-family: inherit;
+    }
+
+    .terminal-prompt {
+      color: #62c67f;
+    }
+
+    .terminal-comment {
+      color: #85958a;
+    }
+
+    .quickstart-aside {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+    }
+
+    .aside-label {
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Download page */
+
+    .download-intro {
+      max-width: 760px;
+    }
+
+    .download-intro .section-heading {
+      margin-bottom: 20px;
+    }
+
+    .download-note {
+      margin: 0 0 9px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .release-panel {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+    }
+
+    .release-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 23px 25px;
+      border-bottom: 1px solid var(--border);
+      background: #fafcfb;
+    }
+
+    .release-title {
+      margin: 0;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+    }
+
+    .release-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 9px;
+      border: 1px solid #c5e4ce;
+      border-radius: 3px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .release-status::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .release-date {
+      margin-top: 5px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .release-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0;
+    }
+
+    .release-item {
+      min-width: 0;
+      padding: 25px;
+    }
+
+    .release-item + .release-item {
+      border-left: 1px solid var(--border);
+    }
+
+    .release-item h3 {
+      margin: 0 0 16px;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .release-item p {
+      margin: 0 0 12px;
+      color: var(--text-secondary);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .release-item p:last-child {
+      margin-bottom: 0;
+    }
+
+    .file-name {
+      display: block;
+      overflow-wrap: anywhere;
+      padding: 12px 13px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--surface-muted);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .checksum {
+      display: block;
+      overflow-wrap: anywhere;
+      margin-top: 7px;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: #fafcfb;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      line-height: 1.8;
+    }
+
+    .verify-label {
+      margin-top: 18px !important;
+    }
+
+    .command-window {
+      overflow-x: auto;
+      padding: 13px 14px;
+      border: 1px solid #303834;
+      border-radius: 3px;
+      background: var(--code-bg);
+      color: var(--code-text);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.8;
+      white-space: nowrap;
+    }
+
+    .command-window code {
+      font-family: inherit;
+    }
+
+    .repository-link {
+      display: block;
+      overflow-wrap: anywhere;
+      padding: 12px 13px;
+      border: 1px solid #c5e4ce;
+      border-radius: 3px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      transition: background 160ms ease, border-color 160ms ease;
+    }
+
+    .repository-link:hover {
+      border-color: var(--accent);
+      background: #e1f1e5;
+    }
+
+    .repository-description {
+      margin-top: 12px !important;
+    }
+
+    .installation-block {
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .installation-heading {
+      margin: 0;
+      padding: 17px 20px;
+      border-bottom: 1px solid #39413d;
+      color: #9ba79f;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .installation-block pre {
+      padding: 18px 20px 21px;
+    }
+
+    .previous-release-note {
+      max-width: 760px;
+      margin: 0 0 24px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .version-table td:first-child {
+      width: 17%;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .version-table td:nth-child(2) {
+      width: 21%;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .version-table td:last-child {
+      width: auto;
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      white-space: normal;
+    }
+
+    .version-history-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 21px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 600;
+      transition: color 160ms ease;
+    }
+
+    .version-history-link:hover {
+      color: var(--accent);
+    }
+
+    .version-history-link .arrow {
+      font-size: 15px;
+    }
+
+    .checksum-panel {
+      display: flex;
+      gap: 17px;
+      align-items: flex-start;
+      padding: 21px 23px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+    }
+
+    .checksum-icon {
+      display: flex;
+      flex: 0 0 34px;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 3px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .checksum-content {
+      min-width: 0;
+    }
+
+    .checksum-content p {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .checksum-content p + p {
+      margin-top: 6px;
+    }
+
+    /* Footer */
+
+    .footer {
+      padding: 27px 0 32px;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px 20px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+
+    .footer-site {
+      color: var(--text-secondary);
+      transition: color 160ms ease;
+    }
+
+    .footer-site:hover {
+      color: var(--accent-dark);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 900px) {
+      :root {
+        --sidebar-width: 210px;
+      }
+
+      .sidebar {
+        padding-right: 18px;
+        padding-left: 18px;
+      }
+
+      .container {
+        width: min(100% - 64px, 1000px);
+      }
+
+      .release-body {
+        grid-template-columns: 1fr;
+      }
+
+      .release-item + .release-item {
+        border-top: 1px solid var(--border);
+        border-left: none;
+      }
+    }
+
+    @media (max-width: 680px) {
+      :root {
+        --sidebar-width: 0px;
+      }
+
+      .sidebar {
+        position: relative;
+        width: 100%;
+        padding: 17px 22px 14px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .brand {
+        margin-bottom: 17px;
+      }
+
+      .nav-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 3px;
+      }
+
+      .nav-list a {
+        min-height: 34px;
+        padding: 6px 9px;
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        font-size: 11px;
+      }
+
+      .nav-list a.active {
+        border-bottom-color: var(--accent);
+        border-left-color: transparent;
+      }
+
+      .sidebar-bottom {
+        display: none;
+      }
+
+      .main {
+        margin-left: 0;
+      }
+
+      .container {
+        width: min(100% - 40px, 1000px);
+      }
+
+      .hero {
+        padding: 55px 0 45px;
+      }
+
+      h1 {
+        font-size: clamp(29px, 8vw, 38px);
+      }
+
+      .section {
+        padding: 43px 0;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .method-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .release-header {
+        padding: 19px;
+      }
+
+      .release-item {
+        padding: 20px;
+      }
+
+      .version-table th,
+      .version-table td {
+        padding: 12px;
+      }
+
+      .checksum-panel {
+        padding: 17px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav-list a {
+        padding-right: 7px;
+        padding-left: 7px;
+        font-size: 10px;
+      }
+
+      .release-title {
+        font-size: 15px;
+      }
+
+      .release-status {
+        font-size: 9px;
+      }
+
+      .version-table td:first-child,
+      .version-table td:nth-child(2) {
+        white-space: normal;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header class="site">
-  <div class="wrap bar">
-    <a class="wordmark" href="index.html">MTRS<span class="slash">/</span>SDI-BCA<small>toolkit</small></a>
-    <nav class="main">
-      <a href="index.html">Home</a>
-      <a href="download.html" class="active">Download</a>
-      <a href="changelog.html">Version History</a>
-      <a href="docs.html">Documentation</a>
-      <a href="stats.html">Download Statistics</a>
+  <aside class="sidebar">
+    <a href="/" class="brand" aria-label="MTRS SDI-BCA Toolkit Home">
+      <span class="brand-main">MTRS</span>
+      <span class="brand-slash">/</span>
+      <span class="brand-sub">SDI-BCA</span>
+      <span class="brand-toolkit">toolkit</span>
+    </a>
+
+    <nav aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="#download" class="active" aria-current="page">Download</a></li>
+        <li><a href="#previous-releases">Version History</a></li>
+        <li><a href="/documentation">Documentation</a></li>
+        <li><a href="/download-statistics">Download Statistics</a></li>
+      </ul>
     </nav>
-  </div>
-</header>
 
-<main>
-  <div class="wrap">
-
-    <p class="kicker">Download</p>
-    <h1>Get the toolkit</h1>
-    <p class="lede">The toolkit is free software under the MIT License.
-    Python ≥ 3.9, standard library only, no runtime dependencies.</p>
-
-    <div class="release current">
-      <div class="head">
-        <span class="v">v1.4.0 — current release</span>
-        <span class="d">released 2026-03-20</span>
-      </div>
-      <div class="body">
-        <p><strong>Source distribution</strong> (tarball, ~30 KB):</p>
-        <p><a class="btn" href="downloads/mtrs-sdibca-toolkit-1.4.0.tar.gz">mtrs-sdibca-toolkit-1.4.0.tar.gz</a></p>
-        <div class="greybox">SHA-256: b508e9418782c022e9c9670b4942d6afe4f4540623829fbd19d90b6a62f1faba</div>
-        <p class="small">Verify with: <code>shasum -a 256 mtrs-sdibca-toolkit-1.4.0.tar.gz</code></p>
-        <p><strong>Git repository</strong> (recommended):<br>
-        <a href="https://github.com/fanshiyu35/mtrs-sdibca-toolkit">github.com/fanshiyu35/mtrs-sdibca-toolkit</a></p>
-        <h3>Installation</h3>
-        <pre><code>$ pip install .            # from the unpacked tarball or a git clone
-# or run directly from the source tree — no installation needed</code></pre>
-      </div>
+    <div class="sidebar-bottom">
+      <a href="https://mtrs-toolkit.org">
+        <span class="sidebar-indicator"></span>mtrs-toolkit.org
+      </a>
     </div>
+  </aside>
 
-    <h2>Previous releases</h2>
-    <p class="small">Older releases are kept in the project archive; archived
-    builds are available on request via the project contact address.</p>
-    <table>
-      <tr><th>Version</th><th>Released</th><th>Highlights</th></tr>
-      <tr><td class="mono">v1.3.0</td><td class="mono">2025-12-08</td><td>Parallel ensemble evaluation; JSON report schema; download telemetry</td></tr>
-      <tr><td class="mono">v1.2.0</td><td class="mono">2025-06-18</td><td>SDI-BCA module; unified command-line interface</td></tr>
-      <tr><td class="mono">v1.1.0</td><td class="mono">2024-11-04</td><td>Reversal probability; cross-area transferability rule; CSV input/output</td></tr>
-      <tr><td class="mono">v1.0.0</td><td class="mono">2024-06-15</td><td>Initial release: MTRS six-source decomposition and stability verdict</td></tr>
-    </table>
-    <p class="small">Full details in the <a href="changelog.html">version history</a>.</p>
+  <main class="main">
 
-    <div class="callout">
-      <div class="t">Checksums</div>
-      <p>Every source distribution is published with its SHA-256 checksum.
-      Report a mismatch via the project contact address before running
-      untrusted downloads.</p>
-    </div>
+    <header class="hero" id="download">
+      <div class="container">
+        <div class="eyebrow">
+          <span class="dot"></span>
+          Download
+        </div>
 
-  </div>
-</main>
+        <h1>Download</h1>
 
-<footer class="site">
-  <div class="wrap cols">
-    <div class="mono">© 2024–2026 MTRS Toolkit Project · MIT License</div>
-    <div class="mono">mtrs-toolkit.org</div>
-  </div>
-</footer>
+        <p class="hero-description">
+          Get the toolkit
+        </p>
+
+        <div class="metadata">
+          <span class="meta-tag version">v1.4.0 — current release</span>
+          <span class="meta-tag">released 2026-03-20</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" aria-labelledby="get-toolkit-heading">
+      <div class="container download-intro">
+
+        <div class="section-heading">
+          <div class="section-kicker">DOWNLOAD</div>
+          <h2 id="get-toolkit-heading">Get the toolkit</h2>
+        </div>
+
+        <p class="download-note">
+          The toolkit is free software under the MIT License.
+        </p>
+
+        <p class="download-note">
+          Python ≥ 3.9, standard library only, no runtime dependencies.
+        </p>
+
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="current-release-heading">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="section-kicker">LATEST RELEASE</div>
+          <h2 id="current-release-heading">v1.4.0 — current release</h2>
+          <p class="section-lead">released 2026-03-20</p>
+        </div>
+
+        <div class="release-panel">
+
+          <div class="release-header">
+            <div>
+              <h3 class="release-title">v1.4.0 — current release</h3>
+              <div class="release-date">released 2026-03-20</div>
+            </div>
+            <span class="release-status">v1.4.0 — current release</span>
+          </div>
+
+          <div class="release-body">
+
+            <div class="release-item">
+              <h3>Source distribution</h3>
+
+              <p>Source distribution (tarball, ~30 KB):</p>
+
+              <code class="file-name">mtrs-sdibca-toolkit-1.4.0.tar.gz</code>
+
+              <p class="verify-label">SHA-256:</p>
+
+              <code class="checksum">b508e9418782c022e9c9670b4942d6afe4f4540623829fbd19d90b6a62f1faba</code>
+
+              <p class="verify-label">Verify with:</p>
+
+              <div class="command-window">
+                <code>shasum -a 256 mtrs-sdibca-toolkit-1.4.0.tar.gz</code>
+              </div>
+            </div>
+
+            <div class="release-item">
+              <h3>Git repository</h3>
+
+              <p>Git repository (recommended):</p>
+
+              <a class="repository-link" href="https://github.com/fanshiyu35/mtrs-sdibca-toolkit" target="_blank" rel="noopener noreferrer">
+                github.com/fanshiyu35/mtrs-sdibca-toolkit
+              </a>
+
+              <div class="installation-block">
+                <h3 class="installation-heading">Installation</h3>
+                <pre><code><span class="terminal-prompt">$</span> pip install .            <span class="terminal-comment"># from the unpacked tarball or a git clone</span>
+<span class="terminal-comment"># or run directly from the source tree — no installation needed</span></code></pre>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section" id="previous-releases" aria-labelledby="previous-releases-heading">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="section-kicker">RELEASE ARCHIVE</div>
+          <h2 id="previous-releases-heading">Previous releases</h2>
+        </div>
+
+        <p class="previous-release-note">
+          Older releases are kept in the project archive; archived
+          builds are available on request via the project contact address.
+        </p>
+
+        <div class="table-wrap">
+          <table class="version-table">
+            <thead>
+              <tr>
+                <th scope="col">Version</th>
+                <th scope="col">Released</th>
+                <th scope="col">Highlights</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>v1.3.0</td>
+                <td>2025-12-08</td>
+                <td>Parallel ensemble evaluation; JSON report schema; download telemetry</td>
+              </tr>
+
+              <tr>
+                <td>v1.2.0</td>
+                <td>2025-06-18</td>
+                <td>SDI-BCA module; unified command-line interface</td>
+              </tr>
+
+              <tr>
+                <td>v1.1.0</td>
+                <td>2024-11-04</td>
+                <td>Reversal probability; cross-area transferability rule; CSV input/output</td>
+              </tr>
+
+              <tr>
+                <td>v1.0.0</td>
+                <td>2024-06-15</td>
+                <td>Initial release: MTRS six-source decomposition and stability verdict</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a href="/version-history" class="version-history-link">
+          Full details in the version history
+          <span class="arrow">→</span>
+        </a>
+
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="checksums-heading">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="section-kicker">INTEGRITY &amp; VERIFICATION</div>
+          <h2 id="checksums-heading">Checksums</h2>
+        </div>
+
+        <div class="checksum-panel">
+          <div class="checksum-icon" aria-hidden="true">#</div>
+
+          <div class="checksum-content">
+            <p>
+              Every source distribution is published with its SHA-256 checksum.
+            </p>
+
+            <p>
+              Report a mismatch via the project contact address before running
+              untrusted downloads.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <span>© 2024–2026 MTRS Toolkit Project · MIT License</span>
+        <a href="https://mtrs-toolkit.org" class="footer-site">mtrs-toolkit.org</a>
+      </div>
+    </footer>
+
+  </main>
 
 </body>
 </html>

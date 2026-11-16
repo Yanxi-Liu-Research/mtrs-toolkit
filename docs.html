@@ -1,81 +1,1119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>Documentation — MTRS · SDI-BCA Toolkit</title>
-<link rel="stylesheet" href="assets/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f6f5">
+  <title>Documentation / MTRS / SDI-BCA Toolkit</title>
+  <style>
+    :root {
+      --accent: #33aa55;
+      --accent-dark: #268743;
+      --accent-soft: #eaf5ed;
+      --bg: #f5f6f5;
+      --surface: #ffffff;
+      --surface-muted: #f0f2f0;
+      --text: #303633;
+      --text-secondary: #69716c;
+      --text-muted: #929a94;
+      --border: #e2e6e2;
+      --code-bg: #242927;
+      --code-text: #dce5de;
+      --sidebar-width: 248px;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Helvetica, Arial, sans-serif;
+      --font-mono: Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 32px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* Sidebar */
+
+    .sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      width: var(--sidebar-width);
+      padding: 34px 24px 25px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 48px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.8;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-main {
+      color: var(--text);
+    }
+
+    .brand-slash {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .brand-sub {
+      color: var(--accent);
+    }
+
+    .brand-toolkit {
+      flex-basis: 100%;
+      margin-top: -5px;
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.4px;
+    }
+
+    .nav-label {
+      margin: 0 0 12px 10px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .nav-list a {
+      display: flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 8px 12px;
+      border-left: 2px solid transparent;
+      border-radius: 3px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      transition: color 160ms ease, background 160ms ease;
+    }
+
+    .nav-list a:hover,
+    .nav-list a.active {
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+    }
+
+    .nav-list a.active {
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .sidebar-bottom {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .sidebar-bottom a {
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      transition: color 160ms ease;
+    }
+
+    .sidebar-bottom a:hover {
+      color: var(--accent);
+    }
+
+    .sidebar-indicator {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      vertical-align: middle;
+    }
+
+    /* Main layout */
+
+    .main {
+      min-height: 100vh;
+      margin-left: var(--sidebar-width);
+    }
+
+    .container {
+      width: min(100% - 104px, 1000px);
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      padding: 91px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 24px;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    .eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0 0 22px;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: clamp(30px, 4vw, 43px);
+      font-weight: 700;
+      line-height: 1.28;
+      letter-spacing: -2px;
+    }
+
+    .hero-description {
+      max-width: 730px;
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.95;
+    }
+
+    .hero-description strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .metadata {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 29px;
+    }
+
+    .meta-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 29px;
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .meta-tag.version {
+      border-color: #c5e4ce;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 160ms ease;
+    }
+
+    .button:hover {
+      border-color: var(--accent);
+      color: var(--accent-dark);
+    }
+
+    .button-primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .button-primary:hover {
+      border-color: var(--accent-dark);
+      background: var(--accent-dark);
+      color: #fff;
+    }
+
+    .button .arrow {
+      margin-left: 9px;
+      font-size: 15px;
+      line-height: 1;
+    }
+
+    /* Content sections */
+
+    .section {
+      padding: 62px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-heading {
+      margin-bottom: 32px;
+    }
+
+    .section-kicker {
+      margin-bottom: 9px;
+      color: var(--accent-dark);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 23px;
+      font-weight: 700;
+      line-height: 1.45;
+      letter-spacing: -0.8px;
+    }
+
+    .section-lead {
+      margin: 9px 0 0;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    /* Method cards */
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .method-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 25px 24px 23px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+      transition: border-color 180ms ease, transform 180ms ease;
+    }
+
+    .method-card:hover {
+      border-color: #b8d9c1;
+      transform: translateY(-2px);
+    }
+
+    .method-number {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      min-height: 24px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .method-card h3 {
+      margin: 17px 0 13px;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.55;
+      letter-spacing: -0.4px;
+    }
+
+    .method-card p {
+      margin: 0 0 16px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.85;
+    }
+
+    .method-card .introduced {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+
+    .method-link {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 7px;
+      margin-top: 15px;
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .method-link:hover {
+      color: var(--accent);
+    }
+
+    /* Reporting table */
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      padding: 14px 17px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-muted);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 17px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 12px;
+      line-height: 1.75;
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: #fafcfb;
+    }
+
+    td:first-child {
+      width: 34%;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    td:nth-child(2) {
+      width: 46%;
+    }
+
+    td:last-child {
+      width: 20%;
+      color: var(--accent-dark);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .verdict {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 19px;
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    .verdict-code {
+      display: inline-block;
+      padding: 3px 8px;
+      border: 1px solid #c5e4ce;
+      border-radius: 2px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* Quick start */
+
+    .quickstart-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 230px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .code-window {
+      overflow: hidden;
+      border: 1px solid #303834;
+      border-radius: 4px;
+      background: var(--code-bg);
+      box-shadow: 0 3px 12px rgba(25, 35, 29, 0.06);
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 39px;
+      padding: 0 15px;
+      border-bottom: 1px solid #39413d;
+      color: #9ba79f;
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .terminal-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #59625d;
+    }
+
+    .terminal-dots span:first-child {
+      background: var(--accent);
+    }
+
+    pre {
+      overflow-x: auto;
+      margin: 0;
+      padding: 22px 20px 24px;
+      color: var(--code-text);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 2.2;
+      tab-size: 4;
+    }
+
+    pre code {
+      font-family: inherit;
+    }
+
+    .terminal-prompt {
+      color: #62c67f;
+    }
+
+    .terminal-comment {
+      color: #85958a;
+    }
+
+    .quickstart-aside {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+    }
+
+    .aside-label {
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+    }
+
+    /* Documentation content */
+
+    .doc-content {
+      padding-bottom: 20px;
+    }
+
+    .doc-block {
+      margin-bottom: 39px;
+    }
+
+    .doc-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .doc-block h3 {
+      margin: 0 0 17px;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.55;
+      letter-spacing: -0.4px;
+    }
+
+    .doc-block h4 {
+      margin: 25px 0 12px;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    .doc-block p {
+      margin: 0 0 15px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.95;
+    }
+
+    .doc-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .doc-block strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .doc-block code,
+    .doc-inline-code {
+      padding: 2px 5px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--surface-muted);
+      color: var(--accent-dark);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .doc-code {
+      overflow: hidden;
+      margin: 0;
+      border: 1px solid #303834;
+      border-radius: 4px;
+      background: var(--code-bg);
+      box-shadow: 0 3px 12px rgba(25, 35, 29, 0.04);
+    }
+
+    .doc-code pre {
+      padding: 20px 22px 23px;
+      color: var(--code-text);
+      font-size: 11px;
+      line-height: 2;
+      white-space: pre;
+    }
+
+    .doc-code code {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-family: var(--font-mono);
+      font-size: inherit;
+    }
+
+    .doc-table {
+      margin-top: 15px;
+    }
+
+    .doc-table th {
+      padding: 13px 17px;
+    }
+
+    .doc-table td {
+      padding: 14px 17px;
+    }
+
+    .doc-table td:first-child {
+      width: 29%;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .doc-table td:nth-child(2) {
+      width: auto;
+    }
+
+    .doc-table td:last-child {
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      white-space: normal;
+    }
+
+    .doc-table.single-column td:first-child {
+      width: 26%;
+    }
+
+    .doc-note {
+      margin-top: 19px;
+      padding: 17px 19px;
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .doc-note strong {
+      color: var(--text);
+    }
+
+    .doc-formula {
+      display: inline-block;
+      margin: 0 2px;
+      padding: 4px 9px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--surface);
+      color: var(--accent-dark);
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .doc-subsection {
+      margin-top: 24px;
+    }
+
+    .doc-divider {
+      height: 1px;
+      margin: 34px 0;
+      background: var(--border);
+    }
+
+    /* Footer */
+
+    .footer {
+      padding: 27px 0 30px;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      transition: color 160ms ease;
+    }
+
+    .footer-link:hover {
+      color: var(--accent-dark);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 1000px) {
+      .container {
+        width: min(100% - 64px, 1000px);
+      }
+
+      .quickstart-layout {
+        grid-template-columns: minmax(0, 1fr) 200px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      :root {
+        --sidebar-width: 0px;
+      }
+
+      .sidebar {
+        position: relative;
+        width: 100%;
+        min-height: auto;
+        padding: 17px 22px 14px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .brand {
+        margin-bottom: 17px;
+      }
+
+      .nav-label {
+        margin-left: 0;
+      }
+
+      .nav-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+
+      .nav-list a {
+        min-height: 34px;
+        padding: 6px 9px;
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        font-size: 11px;
+      }
+
+      .nav-list a.active {
+        border-left-color: transparent;
+        border-bottom-color: var(--accent);
+      }
+
+      .sidebar-bottom {
+        display: none;
+      }
+
+      .main {
+        margin-left: 0;
+      }
+
+      .container {
+        width: min(100% - 44px, 1000px);
+      }
+
+      .hero {
+        padding: 60px 0 48px;
+      }
+
+      .section {
+        padding: 45px 0;
+      }
+
+      .method-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quickstart-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      body {
+        font-size: 13px;
+      }
+
+      .container {
+        width: calc(100% - 36px);
+      }
+
+      .hero {
+        padding: 48px 0 40px;
+      }
+
+      h1 {
+        font-size: 29px;
+        letter-spacing: -1.3px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .section {
+        padding: 39px 0;
+      }
+
+      .section-heading {
+        margin-bottom: 24px;
+      }
+
+      .doc-block {
+        margin-bottom: 31px;
+      }
+
+      .doc-table th,
+      .doc-table td {
+        padding: 11px 12px;
+      }
+
+      .doc-code pre {
+        padding: 17px 15px 19px;
+        font-size: 10px;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<header class="site">
-  <div class="wrap bar">
-    <a class="wordmark" href="index.html">MTRS<span class="slash">/</span>SDI-BCA<small>toolkit</small></a>
-    <nav class="main">
-      <a href="index.html">Home</a>
-      <a href="download.html">Download</a>
-      <a href="changelog.html">Version History</a>
-      <a href="docs.html" class="active">Documentation</a>
-      <a href="stats.html">Download Statistics</a>
+  <aside class="sidebar">
+    <a class="brand" href="index.html" aria-label="MTRS SDI-BCA Toolkit Home">
+      <span class="brand-main">MTRS</span>
+      <span class="brand-slash">/</span>
+      <span class="brand-sub">SDI-BCA</span>
+      <span class="brand-toolkit">toolkit</span>
+    </a>
+
+    <nav aria-label="Main navigation">
+      <p class="nav-label">Navigation</p>
+      <ul class="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="download.html">Download</a></li>
+        <li><a href="version-history.html">Version History</a></li>
+        <li><a href="documentation.html" class="active" aria-current="page">Documentation</a></li>
+        <li><a href="download-statistics.html">Download Statistics</a></li>
+      </ul>
     </nav>
-  </div>
-</header>
 
-<main>
-  <div class="wrap">
+    <div class="sidebar-bottom">
+      <a href="https://mtrs-toolkit.org">
+        <span class="sidebar-indicator"></span>mtrs-toolkit.org
+      </a>
+    </div>
+  </aside>
 
-    <p class="kicker">Documentation</p>
-    <h1>Usage guide</h1>
-    <p class="lede">Installation, input formats, decision rules and worked
-    examples. The complete API reference lives in the docstrings; the source
-    ships with a unit-test suite (<code>python3 -m unittest discover -s tests</code>).</p>
+  <main class="main">
 
-    <h2>Installation</h2>
-    <pre><code>$ git clone https://github.com/fanshiyu35/mtrs-sdibca-toolkit.git
-$ cd mtrs-sdibca-toolkit
-$ pip install .      # optional — the packages import from the source tree</code></pre>
-    <p>Requirements: Python ≥ 3.9. No third-party dependencies.</p>
+    <header class="hero">
+      <div class="container">
+        <div class="eyebrow">
+          <span class="dot"></span>
+          Documentation
+        </div>
 
-    <h2 id="mtrs">MTRS — ranking stability</h2>
+        <h1>Usage guide</h1>
 
-    <h3>Inputs</h3>
-    <table>
-      <tr><th>Input</th><th>Meaning</th></tr>
-      <tr><td class="mono">matrix</td><td>Decision matrix: scenarios × indicators</td></tr>
-      <tr><td class="mono">weights</td><td>Nominal indicator weights (normalised internally)</td></tr>
-      <tr><td class="mono">directions</td><td>+1 higher-better, −1 lower-better per indicator</td></tr>
-      <tr><td class="mono">spec</td><td>Uncertainty specification for the six sources</td></tr>
-    </table>
+        <p class="hero-description">
+          Installation, input formats, decision rules and worked
+          examples. The complete API reference lives in the docstrings; the source
+          ships with a unit-test suite (
+          <code>python3 -m unittest discover -s tests</code>
+          ).
+        </p>
+      </div>
+    </header>
 
-    <h3>The six uncertainty sources</h3>
-    <table>
-      <tr><th>Source</th><th>Ensemble construction</th></tr>
-      <tr><td class="mono">parameter</td><td>Lognormal multiplicative noise, expectation 1, per indicator</td></tr>
-      <tr><td class="mono">data_year</td><td>Alternative data vintages as scenario × indicator shift matrices</td></tr>
-      <tr><td class="mono">model_structure</td><td>Alternative decision matrices from different model structures</td></tr>
-      <tr><td class="mono">policy_mapping</td><td>Alternative scenario-to-indicator mapping matrices</td></tr>
-      <tr><td class="mono">weight</td><td>Indicator weights drawn from a Dirichlet around the nominal weights</td></tr>
-      <tr><td class="mono">area_structure</td><td>The scenarios under alternative metropolitan-area structures</td></tr>
-    </table>
+    <div class="container doc-content">
 
-    <h3>Decision rules</h3>
-    <table>
-      <tr><th>Rule</th><th>Condition (defaults, configurable)</th></tr>
-      <tr><td>Reportable as stable</td><td class="mono">S ≥ 0.80 and reversal p ≤ 0.10</td></tr>
-      <tr><td>Reversal risk</td><td class="mono">top-rank flip probability p &gt; 0.10</td></tr>
-      <tr><td>Transferable across areas</td><td class="mono">transfer failure rate ≤ 0.30</td></tr>
-    </table>
-    <p>The headline verdict is
-    <span class="chip ok">STABLE</span>,
-    <span class="chip warn">REVERSAL</span> or
-    <span class="chip bad">NON-TRANSFERABLE</span>, evaluated in that priority
-    order. A ranking that fails the stability threshold but shows no clean
-    reversal is conservatively reported as NON-TRANSFERABLE.</p>
+      <section class="section" id="installation">
+        <div class="section-heading">
+          <div class="section-kicker">Getting started</div>
+          <h2>Installation</h2>
+        </div>
 
-    <h3>Minimal example</h3>
-    <pre><code>from mtrs import MTRSAnalysis, UncertaintySpec, render_text_report
+        <div class="doc-block">
+          <div class="doc-code">
+            <div class="code-header">
+              <div class="terminal-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span>Terminal</span>
+            </div>
+            <pre><code><span class="terminal-prompt">$</span> git clone https://github.com/fanshiyu35/mtrs-sdibca-toolkit.git
+<span class="terminal-prompt">$</span> cd mtrs-sdibca-toolkit
+<span class="terminal-prompt">$</span> pip install .      <span class="terminal-comment"># optional — the packages import from the source tree</span></code></pre>
+          </div>
 
+          <p style="margin-top: 17px;">
+            Requirements: Python ≥ 3.9. No third-party dependencies.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="mtrs">
+        <div class="section-heading">
+          <div class="section-kicker">Module 01</div>
+          <h2>MTRS — ranking stability</h2>
+        </div>
+
+        <div class="doc-block" id="mtrs-inputs">
+          <h3>Inputs</h3>
+
+          <div class="table-wrap doc-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Input</th>
+                  <th>Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>matrix</td>
+                  <td>Decision matrix: scenarios × indicators</td>
+                </tr>
+                <tr>
+                  <td>weights</td>
+                  <td>Nominal indicator weights (normalised internally)</td>
+                </tr>
+                <tr>
+                  <td>directions</td>
+                  <td>+1 higher-better, −1 lower-better per indicator</td>
+                </tr>
+                <tr>
+                  <td>spec</td>
+                  <td>Uncertainty specification for the six sources</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="doc-block" id="uncertainty-sources">
+          <h3>The six uncertainty sources</h3>
+
+          <div class="table-wrap doc-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Ensemble construction</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>parameter</td>
+                  <td>Lognormal multiplicative noise, expectation 1, per indicator</td>
+                </tr>
+                <tr>
+                  <td>data_year</td>
+                  <td>Alternative data vintages as scenario × indicator shift matrices</td>
+                </tr>
+                <tr>
+                  <td>model_structure</td>
+                  <td>Alternative decision matrices from different model structures</td>
+                </tr>
+                <tr>
+                  <td>policy_mapping</td>
+                  <td>Alternative scenario-to-indicator mapping matrices</td>
+                </tr>
+                <tr>
+                  <td>weight</td>
+                  <td>Indicator weights drawn from a Dirichlet around the nominal weights</td>
+                </tr>
+                <tr>
+                  <td>area_structure</td>
+                  <td>The scenarios under alternative metropolitan-area structures</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="doc-block" id="decision-rules">
+          <h3>Decision rules</h3>
+
+          <div class="table-wrap doc-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Rule</th>
+                  <th>Condition (defaults, configurable)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Reportable as stable</td>
+                  <td>S ≥ 0.80 and reversal p ≤ 0.10</td>
+                </tr>
+                <tr>
+                  <td>Reversal risk</td>
+                  <td>top-rank flip probability p &gt; 0.10</td>
+                </tr>
+                <tr>
+                  <td>Transferable across areas</td>
+                  <td>transfer failure rate ≤ 0.30</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="doc-note">
+            The headline verdict is
+            <span class="verdict-code">STABLE</span>,
+            <span class="verdict-code">REVERSAL</span> or
+            <span class="verdict-code">NON-TRANSFERABLE</span>,
+            evaluated in that priority
+            order. A ranking that fails the stability threshold but shows no clean
+            reversal is conservatively reported as NON-TRANSFERABLE.
+          </div>
+        </div>
+
+        <div class="doc-block" id="mtrs-example">
+          <h3>Minimal example</h3>
+
+          <div class="doc-code">
+            <div class="code-header">
+              <div class="terminal-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span>Python</span>
+            </div>
+            <pre><code>from mtrs import MTRSAnalysis, UncertaintySpec, render_text_report
 matrix = [
     [78, 64, 55, 42, 38, 71],
     [69, 58, 61, 30, 44, 64],
@@ -95,31 +1133,85 @@ analysis = MTRSAnalysis(
 )
 result = analysis.run(n_draws=1000, seed=42)
 print(render_text_report(result))</code></pre>
-    <p class="small">Stability score: <code>S = 1 − D / D_max</code>, where D is
-    the mean total rank displacement over the ensemble and
-    <code>D_max = floor(n²/2)</code>.</p>
+          </div>
+        </div>
 
-    <h2 id="sdibca">SDI-BCA — staged-delay benefit-cost analysis</h2>
+        <div class="doc-block" id="stability-score">
+          <h3>Stability score</h3>
+          <p>
+            Stability score:
+            <span class="doc-formula">S = 1 − D / D_max</span>,
+            where D is
+            the mean total rank displacement over the ensemble and
+            <span class="doc-formula">D_max = floor(n²/2)</span>.
+          </p>
+        </div>
+      </section>
 
-    <h3>Stage model</h3>
-    <p>Stages form a directed dependency graph. A stage opens when its own
-    construction is complete <em>and</em> every prerequisite is operational
-    (plus an optional handover lag). Costs accrue uniformly over construction;
-    benefits accrue from the opening year with an optional linear ramp-up.
-    Discounting is end-of-year.</p>
+      <section class="section" id="sdibca">
+        <div class="section-heading">
+          <div class="section-kicker">Module 02</div>
+          <h2>SDI-BCA — staged-delay benefit-cost analysis</h2>
+        </div>
 
-    <h3>Outputs</h3>
-    <table>
-      <tr><th>Output</th><th>Meaning</th></tr>
-      <tr><td class="mono">base / delayed NPV, BCR</td><td>Programme value with and without the delay schedule</td></tr>
-      <tr><td class="mono">ΔNPV, ΔBCR</td><td>Total delay impact</td></tr>
-      <tr><td class="mono">marginal</td><td>NPV impact of each delayed stage alone</td></tr>
-      <tr><td class="mono">interaction</td><td>ΔNPV − Σ marginals: the staged-delay interaction term</td></tr>
-    </table>
+        <div class="doc-block" id="stage-model">
+          <h3>Stage model</h3>
 
-    <h3>Minimal example</h3>
-    <pre><code>from sdibca import SDIBCAModel, Stage
+          <p>
+            Stages form a directed dependency graph. A stage opens when its own
+            construction is complete
+            <strong>and</strong>
+            every prerequisite is operational
+            (plus an optional handover lag). Costs accrue uniformly over construction;
+            benefits accrue from the opening year with an optional linear ramp-up.
+            Discounting is end-of-year.
+          </p>
+        </div>
 
+        <div class="doc-block" id="sdibca-outputs">
+          <h3>Outputs</h3>
+
+          <div class="table-wrap doc-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Output</th>
+                  <th>Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>base / delayed NPV, BCR</td>
+                  <td>Programme value with and without the delay schedule</td>
+                </tr>
+                <tr>
+                  <td>ΔNPV, ΔBCR</td>
+                  <td>Total delay impact</td>
+                </tr>
+                <tr>
+                  <td>marginal</td>
+                  <td>NPV impact of each delayed stage alone</td>
+                </tr>
+                <tr>
+                  <td>interaction</td>
+                  <td>ΔNPV − Σ marginals: the staged-delay interaction term</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="doc-block" id="sdibca-example">
+          <h3>Minimal example</h3>
+
+          <div class="doc-code">
+            <div class="code-header">
+              <div class="terminal-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span>Python</span>
+            </div>
+            <pre><code>from sdibca import SDIBCAModel, Stage
 stages = [
     Stage("BRT corridor", 0, 2, annual_cost=40, annual_benefit=35, ramp_up=1.0),
     Stage("Fare integration", 1, 1, annual_cost=8, annual_benefit=10,
@@ -130,30 +1222,94 @@ stages = [
 model = SDIBCAModel(stages, discount_rate=0.05, horizon=20)
 result = model.analyse({"BRT corridor": 1.0})
 print(result.base["npv"], result.delayed["npv"], result.delta_npv)</code></pre>
+          </div>
+        </div>
+      </section>
 
-    <h2>CSV layouts</h2>
-    <h3>Decision matrix</h3>
-    <div class="greybox">scenario,ind_a,ind_b<br>Scenario 1,10,5<br>Scenario 2,6,9</div>
-    <h3>Vintage shifts (stacked, one block per vintage)</h3>
-    <div class="greybox">vintage,scenario,ind_a,ind_b<br>data_year_2019,Scenario 1,0.10,0.02<br>data_year_2019,Scenario 2,-0.05,0.03<br>data_year_2021,Scenario 1,0.00,0.01<br>data_year_2021,Scenario 2,0.04,-0.02</div>
-    <h3>SDI-BCA stages</h3>
-    <div class="greybox">name,start_year,duration,annual_cost,annual_benefit,ramp_up,handover_lag,depends_on<br>BRT corridor,0,2,40,35,1.0,0.0,<br>Fare integration,1,1,8,10,0.5,0.5,BRT corridor</div>
+      <section class="section" id="csv-layouts">
+        <div class="section-heading">
+          <div class="section-kicker">Data reference</div>
+          <h2>CSV layouts</h2>
+        </div>
 
-    <h2>Reproducibility</h2>
-    <p>All randomness flows from a single seed passed to
-    <code>MTRSAnalysis.run()</code>. Identical inputs and seed reproduce
-    identical results; the shipped examples pin their seeds. Reports embed
-    the seed and the number of draws per source.</p>
+        <div class="doc-block">
+          <h3>Decision matrix</h3>
 
-  </div>
-</main>
+          <div class="doc-code">
+            <div class="code-header">
+              <div class="terminal-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span>CSV</span>
+            </div>
+            <pre><code>scenario,ind_a,ind_b
+Scenario 1,10,5
+Scenario 2,6,9</code></pre>
+          </div>
+        </div>
 
-<footer class="site">
-  <div class="wrap cols">
-    <div class="mono">© 2024–2026 MTRS Toolkit Project · MIT License</div>
-    <div class="mono">mtrs-toolkit.org</div>
-  </div>
-</footer>
+        <div class="doc-block">
+          <h3>Vintage shifts (stacked, one block per vintage)</h3>
+
+          <div class="doc-code">
+            <div class="code-header">
+              <div class="terminal-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span>CSV</span>
+            </div>
+            <pre><code>vintage,scenario,ind_a,ind_b
+data_year_2019,Scenario 1,0.10,0.02
+data_year_2019,Scenario 2,-0.05,0.03
+data_year_2021,Scenario 1,0.00,0.01
+data_year_2021,Scenario 2,0.04,-0.02</code></pre>
+          </div>
+        </div>
+
+        <div class="doc-block">
+          <h3>SDI-BCA stages</h3>
+
+          <div class="doc-code">
+            <div class="code-header">
+              <div class="terminal-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span>CSV</span>
+            </div>
+            <pre><code>name,start_year,duration,annual_cost,annual_benefit,ramp_up,handover_lag,depends_on
+BRT corridor,0,2,40,35,1.0,0.0,
+Fare integration,1,1,8,10,0.5,0.5,BRT corridor</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="reproducibility">
+        <div class="section-heading">
+          <div class="section-kicker">Execution</div>
+          <h2>Reproducibility</h2>
+        </div>
+
+        <div class="doc-block">
+          <p>
+            All randomness flows from a single seed passed to
+            <code>MTRSAnalysis.run()</code>.
+            Identical inputs and seed reproduce
+            identical results; the shipped examples pin their seeds. Reports embed
+            the seed and the number of draws per source.
+          </p>
+        </div>
+      </section>
+
+    </div>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <span>© 2024–2026 MTRS Toolkit Project · MIT License</span>
+        <a class="footer-link" href="https://mtrs-toolkit.org">mtrs-toolkit.org</a>
+      </div>
+    </footer>
+
+  </main>
 
 </body>
 </html>
