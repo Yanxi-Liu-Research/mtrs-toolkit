@@ -1,0 +1,21 @@
+========================================================================
+SDI-BCA staged-delay analysis
+discount rate: 0.05   horizon: 20 years   base year: 2026
+========================================================================
+
+Effective opening years (base -> with delay):
+  BRT corridor       2.00 ->   3.00
+  Fare integration   3.50 ->   4.50
+  LRT extension      6.50 ->   7.50
+
+Base case:     NPV =    655.97   BCR = 4.012
+Delayed case:  NPV =    585.16   BCR = 3.821
+Delay impact:  dNPV =    -70.81  dBCR = -0.191
+
+Marginal delay contributions to dNPV:
+  BRT corridor        -70.81
+  LRT extension       -10.98
+Staged-delay interaction term:        +10.98
+
+(interaction = total dNPV - sum of marginal dNPVs; it is non-zero
+ when overlapping delays interact through the stage dependency graph)

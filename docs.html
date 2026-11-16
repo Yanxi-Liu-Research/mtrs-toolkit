@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Documentation — MTRS · SDI-BCA Toolkit</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="wordmark" href="index.html">MTRS<span class="slash">/</span>SDI-BCA<small>toolkit</small></a>
+    <nav class="main">
+      <a href="index.html">Home</a>
+      <a href="download.html">Download</a>
+      <a href="changelog.html">Version History</a>
+      <a href="docs.html" class="active">Documentation</a>
+      <a href="stats.html">Download Statistics</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <p class="kicker">Documentation</p>
+    <h1>Usage guide</h1>
+    <p class="lede">Installation, input formats, decision rules and worked
+    examples. The complete API reference lives in the docstrings; the source
+    ships with a unit-test suite (<code>python3 -m unittest discover -s tests</code>).</p>
+
+    <h2>Installation</h2>
+    <pre><code>$ git clone https://github.com/fanshiyu35/mtrs-sdibca-toolkit.git
+$ cd mtrs-sdibca-toolkit
+$ pip install .      # optional — the packages import from the source tree</code></pre>
+    <p>Requirements: Python ≥ 3.9. No third-party dependencies.</p>
+
+    <h2 id="mtrs">MTRS — ranking stability</h2>
+
+    <h3>Inputs</h3>
+    <table>
+      <tr><th>Input</th><th>Meaning</th></tr>
+      <tr><td class="mono">matrix</td><td>Decision matrix: scenarios × indicators</td></tr>
+      <tr><td class="mono">weights</td><td>Nominal indicator weights (normalised internally)</td></tr>
+      <tr><td class="mono">directions</td><td>+1 higher-better, −1 lower-better per indicator</td></tr>
+      <tr><td class="mono">spec</td><td>Uncertainty specification for the six sources</td></tr>
+    </table>
+
+    <h3>The six uncertainty sources</h3>
+    <table>
+      <tr><th>Source</th><th>Ensemble construction</th></tr>
+      <tr><td class="mono">parameter</td><td>Lognormal multiplicative noise, expectation 1, per indicator</td></tr>
+      <tr><td class="mono">data_year</td><td>Alternative data vintages as scenario × indicator shift matrices</td></tr>
+      <tr><td class="mono">model_structure</td><td>Alternative decision matrices from different model structures</td></tr>
+      <tr><td class="mono">policy_mapping</td><td>Alternative scenario-to-indicator mapping matrices</td></tr>
+      <tr><td class="mono">weight</td><td>Indicator weights drawn from a Dirichlet around the nominal weights</td></tr>
+      <tr><td class="mono">area_structure</td><td>The scenarios under alternative metropolitan-area structures</td></tr>
+    </table>
+
+    <h3>Decision rules</h3>
+    <table>
+      <tr><th>Rule</th><th>Condition (defaults, configurable)</th></tr>
+      <tr><td>Reportable as stable</td><td class="mono">S ≥ 0.80 and reversal p ≤ 0.10</td></tr>
+      <tr><td>Reversal risk</td><td class="mono">top-rank flip probability p &gt; 0.10</td></tr>
+      <tr><td>Transferable across areas</td><td class="mono">transfer failure rate ≤ 0.30</td></tr>
+    </table>
+    <p>The headline verdict is
+    <span class="chip ok">STABLE</span>,
+    <span class="chip warn">REVERSAL</span> or
+    <span class="chip bad">NON-TRANSFERABLE</span>, evaluated in that priority
+    order. A ranking that fails the stability threshold but shows no clean
+    reversal is conservatively reported as NON-TRANSFERABLE.</p>
+
+    <h3>Minimal example</h3>
+    <pre><code>from mtrs import MTRSAnalysis, UncertaintySpec, render_text_report
+
+matrix = [
+    [78, 64, 55, 42, 38, 71],
+    [69, 58, 61, 30, 44, 64],
+    [58, 71, 66, 35, 36, 52],
+    [64, 45, 41, 22, 40, 57],
+    [40, 40, 40, 26, 30, 40],
+]
+analysis = MTRSAnalysis(
+    matrix,
+    scenario_names=["Metro extension", "BRT network",
+                    "Road pricing + transit", "TOD intensification", "Baseline"],
+    indicator_names=["accessibility", "emissions", "time saving",
+                     "cost per trip", "safety", "ridership"],
+    weights=[0.20, 0.15, 0.25, 0.15, 0.10, 0.15],
+    directions=[1, 1, 1, -1, 1, 1],
+    spec=UncertaintySpec(parameter={"sigma": 0.06}),
+)
+result = analysis.run(n_draws=1000, seed=42)
+print(render_text_report(result))</code></pre>
+    <p class="small">Stability score: <code>S = 1 − D / D_max</code>, where D is
+    the mean total rank displacement over the ensemble and
+    <code>D_max = floor(n²/2)</code>.</p>
+
+    <h2 id="sdibca">SDI-BCA — staged-delay benefit-cost analysis</h2>
+
+    <h3>Stage model</h3>
+    <p>Stages form a directed dependency graph. A stage opens when its own
+    construction is complete <em>and</em> every prerequisite is operational
+    (plus an optional handover lag). Costs accrue uniformly over construction;
+    benefits accrue from the opening year with an optional linear ramp-up.
+    Discounting is end-of-year.</p>
+
+    <h3>Outputs</h3>
+    <table>
+      <tr><th>Output</th><th>Meaning</th></tr>
+      <tr><td class="mono">base / delayed NPV, BCR</td><td>Programme value with and without the delay schedule</td></tr>
+      <tr><td class="mono">ΔNPV, ΔBCR</td><td>Total delay impact</td></tr>
+      <tr><td class="mono">marginal</td><td>NPV impact of each delayed stage alone</td></tr>
+      <tr><td class="mono">interaction</td><td>ΔNPV − Σ marginals: the staged-delay interaction term</td></tr>
+    </table>
+
+    <h3>Minimal example</h3>
+    <pre><code>from sdibca import SDIBCAModel, Stage
+
+stages = [
+    Stage("BRT corridor", 0, 2, annual_cost=40, annual_benefit=35, ramp_up=1.0),
+    Stage("Fare integration", 1, 1, annual_cost=8, annual_benefit=10,
+          ramp_up=0.5, handover_lag=0.5, depends_on=("BRT corridor",)),
+    Stage("LRT extension", 3, 3, annual_cost=55, annual_benefit=60,
+          ramp_up=1.5, depends_on=("BRT corridor", "Fare integration")),
+]
+model = SDIBCAModel(stages, discount_rate=0.05, horizon=20)
+result = model.analyse({"BRT corridor": 1.0})
+print(result.base["npv"], result.delayed["npv"], result.delta_npv)</code></pre>
+
+    <h2>CSV layouts</h2>
+    <h3>Decision matrix</h3>
+    <div class="greybox">scenario,ind_a,ind_b<br>Scenario 1,10,5<br>Scenario 2,6,9</div>
+    <h3>Vintage shifts (stacked, one block per vintage)</h3>
+    <div class="greybox">vintage,scenario,ind_a,ind_b<br>data_year_2019,Scenario 1,0.10,0.02<br>data_year_2019,Scenario 2,-0.05,0.03<br>data_year_2021,Scenario 1,0.00,0.01<br>data_year_2021,Scenario 2,0.04,-0.02</div>
+    <h3>SDI-BCA stages</h3>
+    <div class="greybox">name,start_year,duration,annual_cost,annual_benefit,ramp_up,handover_lag,depends_on<br>BRT corridor,0,2,40,35,1.0,0.0,<br>Fare integration,1,1,8,10,0.5,0.5,BRT corridor</div>
+
+    <h2>Reproducibility</h2>
+    <p>All randomness flows from a single seed passed to
+    <code>MTRSAnalysis.run()</code>. Identical inputs and seed reproduce
+    identical results; the shipped examples pin their seeds. Reports embed
+    the seed and the number of draws per source.</p>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap cols">
+    <div class="mono">© 2024–2026 MTRS Toolkit Project · MIT License</div>
+    <div class="mono">mtrs-toolkit.org</div>
+  </div>
+</footer>
+
+</body>
+</html>

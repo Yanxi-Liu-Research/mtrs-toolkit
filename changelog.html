@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Version History — MTRS · SDI-BCA Toolkit</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="wordmark" href="index.html">MTRS<span class="slash">/</span>SDI-BCA<small>toolkit</small></a>
+    <nav class="main">
+      <a href="index.html">Home</a>
+      <a href="download.html">Download</a>
+      <a href="changelog.html" class="active">Version History</a>
+      <a href="docs.html">Documentation</a>
+      <a href="stats.html">Download Statistics</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <p class="kicker">Changelog</p>
+    <h1>Version history</h1>
+    <p class="lede">Every release of the toolkit, from the initial MTRS
+    implementation to the open-source v1.4.0.</p>
+
+    <div class="release current">
+      <div class="head">
+        <span class="v">v1.4.0 — open-source release</span>
+        <span class="d">2026-03-20</span>
+      </div>
+      <div class="body">
+        <ul>
+          <li>Published the complete source under the MIT License on GitHub.</li>
+          <li>Launched the public documentation and distribution site.</li>
+          <li>Packaged distribution (<code>pyproject.toml</code>, pip-installable).</li>
+          <li>Example datasets and unit-test suite shipped with the source.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="head">
+        <span class="v">v1.3.0</span>
+        <span class="d">2025-12-08</span>
+      </div>
+      <div class="body">
+        <ul>
+          <li>Parallel ensemble evaluation: six-source draws now run
+          independently per source.</li>
+          <li>Machine-readable JSON report schema (<code>mtrs/report.py</code>).</li>
+          <li>Download telemetry for the self-hosted distribution server.</li>
+          <li>Deterministic seeding documented and pinned in all examples.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="head">
+        <span class="v">v1.2.0 — SDI-BCA joins the toolkit</span>
+        <span class="d">2025-06-18</span>
+      </div>
+      <div class="body">
+        <ul>
+          <li>Added the SDI-BCA module: staged dependency graphs, delay
+          propagation, NPV/BCR with marginal delay decomposition and the
+          staged-delay interaction term.</li>
+          <li>SDI-BCA follows the procedure of Research Report No. 231
+          (June 2025).</li>
+          <li>Unified the MTRS and SDI-BCA interfaces and CSV layouts.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="head">
+        <span class="v">v1.1.0</span>
+        <span class="d">2024-11-04</span>
+      </div>
+      <div class="body">
+        <ul>
+          <li>Reversal probability of the top-ranked scenario, with the
+          REVERSAL verdict.</li>
+          <li>Cross-area transferability rule driven by alternative
+          metropolitan-area structures, with the NON-TRANSFERABLE verdict.</li>
+          <li>CSV input/output for decision matrices, weights and vintages.</li>
+          <li>Plain-text assessment report renderer.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="head">
+        <span class="v">v1.0.0 — initial release</span>
+        <span class="d">2024-06-15</span>
+      </div>
+      <div class="body">
+        <ul>
+          <li>First implementation of the MTRS procedure following the
+          publication of Research Report No. 212 (May 2024).</li>
+          <li>Six-source uncertainty ensemble: model structure, parameter,
+          data-year, policy-mapping, indicator-weight and area-structure
+          perturbations.</li>
+          <li>Ranking-instability variance decomposition and the stability
+          score S.</li>
+          <li>STABLE / REVERSAL verdict logic with configurable thresholds.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="small">Release numbering: MAJOR.MINOR.PATCH. Patch releases fix
+    defects only and are not listed individually.</p>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap cols">
+    <div class="mono">© 2024–2026 MTRS Toolkit Project · MIT License</div>
+    <div class="mono">mtrs-toolkit.org</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+========================================================================
+MTRS Assessment Report - Case A (CSV demo)
+generated: 2026-11-14 16:05
+seed: 20260320   draws per source: 1000
+========================================================================
+
+Base ranking (5 scenarios x 6 indicators):
+  rank 1     BRT network
+  rank 2     Metro extension
+  rank 3     Road pricing + transit
+  rank 4     TOD intensification
+  rank 5     Baseline
+
+Active uncertainty sources: model_structure, parameter, data_year, policy_mapping, weight, area_structure
+
+Stability score S = 0.860
+Verdict: REVERSAL  [REVERSAL]
+  the ranking may reverse; do not report it as stable
+  Reversal probability of the top-ranked scenario: 0.180
+  Cross-area transfer failure rate: 0.533
+
+Six-source variance decomposition:
+  source              draws  mean disp variance  share   
+  data_year            1000      1.758     7.4574   44.9%  ##################
+  policy_mapping       1000      2.068     3.9954   24.1%  ##########
+  weight               1000      1.146     1.6107    9.7%  ####
+  parameter            1000      1.032     1.5510    9.3%  ####
+  model_structure      1000      1.022     0.9995    6.0%  ##
+  area_structure       1000      3.066     0.9956    6.0%  ##
+
+Reporting rules evaluated (thresholds in brackets):
+  Reportable as stable     : no    (S >= 0.80 and no reversal risk)
+  Reversal risk            : yes   (p > 0.10)
+  Transferable across areas: no    (failure rate <= 0.30)
+
+Notes:
+  - Rank displacement is the sum of absolute rank differences
+    between an ensemble member and the base ranking.
+  - The variance share attributes ranking instability to its
+    six sources; the largest share indicates where additional
+    evidence would most improve ranking confidence.
+========================================================================
+
+JSON report written to examples/output/mtrs_report.json
+
+Case B (reversal demo) -> verdict: REVERSAL  (S=0.748, reversal_p=0.475, transfer_fail=None)
+Case C (transferability demo) -> verdict: NON-TRANSFERABLE  (S=0.500, reversal_p=0.000, transfer_fail=1.0)

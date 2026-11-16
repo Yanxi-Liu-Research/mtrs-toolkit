@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>MTRS · SDI-BCA Toolkit — Transport scenario ranking stability and staged-delay benefit-cost analysis</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="wordmark" href="index.html">MTRS<span class="slash">/</span>SDI-BCA<small>toolkit</small></a>
+    <nav class="main">
+      <a href="index.html" class="active">Home</a>
+      <a href="download.html">Download</a>
+      <a href="changelog.html">Version History</a>
+      <a href="docs.html">Documentation</a>
+      <a href="stats.html">Download Statistics</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <h1>MTRS <span class="c">·</span> SDI-BCA</h1>
+      <p class="tag">A reference implementation of the Multivariate Transport
+      Ranking Stability test and Staged-Delay-Inclusive Benefit-Cost Analysis —
+      two open-source methods for evaluating transport policy scenarios under
+      uncertainty and stage dependency.</p>
+      <div>
+        <span class="badge">v1.4.0</span>
+        <span class="badge">MIT License</span>
+        <span class="badge">Python ≥ 3.9</span>
+        <span class="badge">standard library only</span>
+      </div>
+      <div class="actions">
+        <a class="btn" href="download.html">Download v1.4.0</a>
+        <a class="btn ghost" href="docs.html">Documentation</a>
+        <a class="btn ghost" href="https://github.com/fanshiyu35/mtrs-sdibca-toolkit">Source on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+
+    <p class="kicker" style="margin-top:44px;">Overview</p>
+    <h2>Two methods, one question: how much should we trust a scenario ranking?</h2>
+    <p class="lede">Transport policy appraisal produces ranked scenario
+    recommendations. MTRS measures how fragile that ranking is to six sources
+    of uncertainty; SDI-BCA measures how programme delays propagate through
+    stage dependencies and change the economic case.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="mono-tag">Method 1</div>
+        <h3>MTRS — Multivariate Transport Ranking Stability</h3>
+        <p>Takes a decision matrix of policy scenarios scored on transport
+        indicators and an uncertainty specification, then decomposes ranking
+        instability into six sources — model structure, parameters, data year,
+        policy mapping, indicator weights, and metropolitan-area structure —
+        and evaluates three reporting rules.</p>
+        <p class="small">Introduced in Research Report No. 212 (May 2024).</p>
+        <p><a href="docs.html#mtrs">Read the MTRS documentation →</a></p>
+      </div>
+      <div class="card">
+        <div class="mono-tag">Method 2</div>
+        <h3>SDI-BCA — Staged-Delay-Inclusive Benefit-Cost Analysis</h3>
+        <p>Models a staged transport programme as a dependency graph: a stage
+        opens only when its own construction is complete and every prerequisite
+        stage is operational. Delays propagate downstream, and overlapping
+        delays interact — captured as a staged-delay interaction term.</p>
+        <p class="small">Introduced in Research Report No. 231 (June 2025).</p>
+        <p><a href="docs.html#sdibca">Read the SDI-BCA documentation →</a></p>
+      </div>
+    </div>
+
+    <p class="kicker" style="margin-top:52px;">What the toolkit answers</p>
+    <h2>Three reporting rules</h2>
+    <table>
+      <tr><th>Question</th><th>MTRS rule</th><th>Default threshold</th></tr>
+      <tr>
+        <td>May the ranking be reported as stable?</td>
+        <td>Stability score S ≥ threshold, and no reversal risk</td>
+        <td class="num">S ≥ 0.80</td>
+      </tr>
+      <tr>
+        <td>May the ranking reverse?</td>
+        <td>Top-ranked scenario flip probability over the ensemble</td>
+        <td class="num">p &gt; 0.10</td>
+      </tr>
+      <tr>
+        <td>Does the ranking transfer to another metropolitan-area structure?</td>
+        <td>Share of alternative-area draws reproducing the base ranking</td>
+        <td class="num">failure ≤ 0.30</td>
+      </tr>
+    </table>
+    <p class="small">All thresholds are configurable. The headline verdict is
+    <span class="chip ok">STABLE</span>, <span class="chip warn">REVERSAL</span>
+    or <span class="chip bad">NON-TRANSFERABLE</span>.</p>
+
+    <p class="kicker" style="margin-top:52px;">Quick start</p>
+    <h2>Five minutes</h2>
+    <pre><code>$ git clone https://github.com/fanshiyu35/mtrs-sdibca-toolkit.git
+$ cd mtrs-sdibca-toolkit
+$ pip install .            # optional; runs from the source tree too
+$ python3 examples/mtrs_example.py
+$ python3 examples/sdibca_example.py</code></pre>
+    <p class="small">No third-party dependencies. See
+    <a href="docs.html">Documentation</a> for CSV layouts, thresholds and the
+    full API.</p>
+
+    <div class="callout">
+      <div class="t">Latest release</div>
+      <p>v1.4.0 (2026-03-20) — open-source release under the MIT License.
+      See the <a href="changelog.html">version history</a> and
+      <a href="download.html">download</a> pages.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap cols">
+    <div class="mono">© 2024–2026 MTRS Toolkit Project · MIT License</div>
+    <div class="mono">mtrs-toolkit.org</div>
+  </div>
+</footer>
+
+</body>
+</html>

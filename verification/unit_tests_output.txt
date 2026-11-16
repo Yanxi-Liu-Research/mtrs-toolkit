@@ -1,0 +1,34 @@
+test_decomposition_shares_sum_to_one (test_mtrs.TestAnalysis) ... ok
+test_invalid_inputs (test_mtrs.TestAnalysis) ... ok
+test_lower_better_direction (test_mtrs.TestAnalysis) ... ok
+test_no_active_sources (test_mtrs.TestAnalysis) ... ok
+test_nontransferable_verdict (test_mtrs.TestAnalysis) ... ok
+test_reproducible (test_mtrs.TestAnalysis) ... ok
+test_reversal_verdict (test_mtrs.TestAnalysis) ... ok
+test_stable_verdict (test_mtrs.TestAnalysis) ... ok
+test_weights_are_normalised (test_mtrs.TestAnalysis) ... ok
+test_load_matrix_ragged (test_mtrs.TestCSVIO) ... ok
+test_load_matrix_roundtrip (test_mtrs.TestCSVIO) ... ok
+test_kendall_tau_identical (test_mtrs.TestRankingMetrics) ... ok
+test_kendall_tau_reversal (test_mtrs.TestRankingMetrics) ... ok
+test_max_displacement (test_mtrs.TestRankingMetrics) ... ok
+test_rank_displacement_mismatched_length (test_mtrs.TestRankingMetrics) ... ok
+test_rank_vector_ordering (test_mtrs.TestRankingMetrics) ... ok
+test_rank_vector_ties (test_mtrs.TestRankingMetrics) ... ok
+test_json_report_roundtrip (test_mtrs.TestReports) ... ok
+test_bcr_infinite_for_zero_cost (test_sdibca.TestDiscounting) ... ok
+test_bcr_known_value (test_sdibca.TestDiscounting) ... ok
+test_npv_invalid_rate (test_sdibca.TestDiscounting) ... ok
+test_npv_known_value (test_sdibca.TestDiscounting) ... ok
+test_npv_zero_rate_is_sum (test_sdibca.TestDiscounting) ... ok
+test_analyse_against_manual (test_sdibca.TestModel) ... ok
+test_delay_propagation (test_sdibca.TestModel) ... ok
+test_delayed_npv_lower_with_zero_rate_and_truncation (test_sdibca.TestModel) ... ok
+test_effective_opens_base (test_sdibca.TestModel) ... ok
+test_staged_delay_interaction_is_nonzero (test_sdibca.TestModel) ... ok
+test_unknown_stage_and_cycle (test_sdibca.TestModel) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 0.040s
+
+OK
