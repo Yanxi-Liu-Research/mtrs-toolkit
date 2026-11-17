@@ -1,0 +1,7 @@
+indicator,weight
+transit_accessibility,0.20
+emissions_reduction,0.15
+travel_time_saving,0.25
+public_cost_per_trip,0.15
+safety_gain,0.10
+ridership_gain,0.15
