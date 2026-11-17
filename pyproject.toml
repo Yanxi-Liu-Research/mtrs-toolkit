@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mtrs-sdibca-toolkit"
+version = "1.4.0"
+description = "Reference implementation of transport scenario ranking stability (MTRS) and staged-delay benefit-cost analysis (SDI-BCA)"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+keywords = ["transport", "policy-analysis", "ranking-stability", "benefit-cost-analysis", "uncertainty"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
+
+[project.urls]
+Homepage = "https://mtrs-toolkit.org/"
+Documentation = "https://mtrs-toolkit.org/docs.html"
+Repository = "https://github.com/fanshiyu35/mtrs-sdibca-toolkit"
+
+[tool.setuptools]
+packages = ["mtrs", "sdibca"]
