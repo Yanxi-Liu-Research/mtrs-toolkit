@@ -1,0 +1,6 @@
+scenario,transit_accessibility,emissions_reduction,travel_time_saving,public_cost_per_trip,safety_gain,ridership_gain
+Metro extension,82,66,52,44,38,76
+BRT network,73,60,58,31,45,71
+Road pricing + transit,55,72,64,37,35,50
+TOD intensification,66,44,43,23,39,55
+Baseline,40,40,40,26,30,40

@@ -1,0 +1,4 @@
+name,start_year,duration,annual_cost,annual_benefit,ramp_up,handover_lag,depends_on
+BRT corridor,0,2,40,35,1.0,0.0,
+Fare integration,1,1,8,10,0.5,0.5,BRT corridor
+LRT extension,3,3,55,60,1.5,0.0,BRT corridor;Fare integration
