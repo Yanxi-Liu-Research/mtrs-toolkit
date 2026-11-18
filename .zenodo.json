@@ -1,0 +1,19 @@
+{
+    "title": "MTRS/SDI-BCA Reference Implementation",
+    "description": "Reference implementation of the Multivariate Transport Ranking Stability (MTRS) test and the Staged-Delay-Inclusive Benefit-Cost Analysis (SDI-BCA), developed as part of the research programme documented in NTRP Report 212 and Report 231. Public open-source release v1.4.0, November 2026.",
+    "creators": [
+        {
+            "name": "Liu, Yanxi"
+        }
+    ],
+    "license": "MIT",
+    "upload_type": "software",
+    "access_right": "open",
+    "keywords": [
+        "transport planning",
+        "scenario evaluation",
+        "ranking stability",
+        "benefit-cost analysis",
+        "uncertainty"
+    ]
+}
