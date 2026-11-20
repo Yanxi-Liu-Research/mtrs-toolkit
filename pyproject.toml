@@ -19,9 +19,9 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/liuyanxi-2026/mtrs-toolkit"
-Documentation = "https://github.com/liuyanxi-2026/mtrs-toolkit#readme"
-Repository = "https://github.com/liuyanxi-2026/mtrs-toolkit"
+Homepage = "https://github.com/Yanxi-Liu-Research/mtrs-toolkit"
+Documentation = "https://github.com/Yanxi-Liu-Research/mtrs-toolkit#readme"
+Repository = "https://github.com/Yanxi-Liu-Research/mtrs-toolkit"
 
 [tool.setuptools]
 packages = ["mtrs", "sdibca"]

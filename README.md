@@ -14,7 +14,7 @@ Reference implementation of two transport policy analysis methods:
 The MTRS procedure is introduced in Research Report No. 212 (May 2024);
 SDI-BCA in Research Report No. 231 (June 2025).
 
-**Project website:** <https://github.com/liuyanxi-2026/mtrs-toolkit/> · **Latest release:** v1.4.0
+**Project website:** <https://github.com/Yanxi-Liu-Research/mtrs-toolkit/> · **Latest release:** v1.4.0
 (2026-03-20) · **License:** MIT
 
 The toolkit is pure Python (standard library only, Python ≥ 3.9) with no
@@ -79,7 +79,7 @@ end-of-year (`PV = Σ CF_t / (1+r)^t`).
 ## Installation
 
 ```bash
-git clone https://github.com/liuyanxi-2026/mtrs-toolkit.git
+git clone https://github.com/Yanxi-Liu-Research/mtrs-toolkit.git
 cd mtrs-sdibca-toolkit
 pip install .          # optional: the packages also run from the source tree
 ```
